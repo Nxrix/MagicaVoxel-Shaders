@@ -1,0 +1,34 @@
+// xs_begin
+// author : 'nxrix'
+// arg : { var = 'm_pal_len' name = 'Palette Length' value = '32'   range = '1 255'    step = '1'    precision = '0' }
+// xs_end
+
+float dither[16] = float[16](
+   0.0, 8.0, 2.0,10.0,
+  12.0, 4.0,14.0, 6.0,
+   3.0,11.0, 1.0, 9.0,
+  15.0, 7.0,13.0, 5.0
+);
+
+float rgb(vec3 v) {
+  int idx;
+  float min = 9.0;
+  for(int i=1; i<int(m_pal_len); i++) {
+    vec3 col = palette(float(i)).xyz;
+    float d = (v.x - col.x) * (v.x - col.x) + (v.y - col.y) * (v.y - col.y) + (v.z - col.z) * (v.z - col.z);
+    if (d<min) {
+      min = d;
+      idx = i;
+    }
+  }
+  return float(idx);
+}
+
+float map(vec3 v) {
+  int x = int(v.x);
+  int y = int(v.y);
+  int z = int(v.z);
+  int i = (x*x+y*y+z*z)&15;
+  float d = dither[i]/64.0;
+  return rgb(v/i_volume_size+d);
+}
