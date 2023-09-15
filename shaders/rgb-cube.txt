@@ -25,10 +25,8 @@ float rgb(vec3 v) {
 }
 
 float map(vec3 v) {
-  int x = int(v.x);
-  int y = int(v.y);
-  int z = int(v.z);
-  int i = (x*x+y*y+z*z)&15;
+  ivec3 p = ivec3(v);
+  int i = (p.x*p.x+p.y*p.y+p.z*p.z)&15;
   float d = dither[i]/64.0;
   return rgb(v/i_volume_size+d);
 }

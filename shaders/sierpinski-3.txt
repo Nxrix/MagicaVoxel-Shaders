@@ -6,14 +6,7 @@
 // xs_end
 
 float map(vec3 v) {
-  int x = int(v.x);
-  int y = int(v.y);
-  int z = int(v.z);
-  int i = x&y;
-  if ((i&int(i_volume_size.z)-1)==z) {
-    return float((i/int(m_scale))&int(m_pal_len)-1)+m_base;
-  }
-  else {
-    return 0.0;
-  }
+  ivec3 p = ivec3(v);
+  int i = p.x&p.y;
+  return ((i&int(i_volume_size.z)-1)==p.z)?float((i/int(m_scale))&int(m_pal_len)-1)+m_base:0.0;
 }

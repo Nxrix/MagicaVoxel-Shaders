@@ -5,9 +5,13 @@
 // arg : { var = 'm_scale' name = 'Color Scale' value = '2'   range = '1 32'    step = '1'    precision = '0' }
 // xs_end
 
+#define cx i_volume_size.x/2.0
+#define cy i_volume_size.y/2.0
+#define cz i_volume_size.z/2.0
+
 float map(vec3 v) {
-  ivec3 p = ivec3(v);
-  int i = p.x/2^p.y/2^p.z/2;
-  float d = max(max(abs(v.x-i_volume_size.x/2.0),abs(v.y-i_volume_size.y/2.0)),abs(v.z-i_volume_size.z/2.0));
+  ivec3 p = ivec3(abs(v-vec3(cx,cy,cz)));
+  int i = (p.x|p.y)^(p.y|p.z)&(p.z|p.x);
+  float d = max(max(abs(v.x-cx),abs(v.y-cy)),abs(v.z-cz));
   return (i==int(d))?float((p.x^p.y^p.z)/int(m_scale)&int(m_pal_len)-1)+m_base:0.0;
 }

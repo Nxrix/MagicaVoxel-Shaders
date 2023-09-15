@@ -6,14 +6,7 @@
 // xs_end
 
 float map(vec3 v) {
-  int x = int(v.x);
-  int y = int(v.y);
-  int z = int(v.z);
-  float index = mod(float(x^y^z),7);
-  if (index==0) {
-    return float((x^y)/int(m_scale)&int(m_pal_len)-1)+m_base;
-  }
-  else {
-    return 0.0;
-  }
+  ivec3 p = ivec3(v);
+  float index = mod(float(p.x^p.y^p.z),7);
+  return (index==0)?float((p.x^p.y)/int(m_scale)&int(m_pal_len)-1)+m_base:0.0;
 }
