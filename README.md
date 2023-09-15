@@ -7,3 +7,7 @@ GLSL based voxel shaders for MagicaVoxel.
 The sierpinski fractals are based on bitwise operations (`^`,`|`,`&`)
 
 <img src="export/snap2023-09-01-09-48-34.png" width="512" style="border-radius: 50%"><br>
+<img src="export/snap2023-09-01-10-42-38.png" width="512" style="border-radius: 50%"><br>
+<img src="export/snap2023-09-14-21-49-57.png" width="512" style="border-radius: 50%"><br>
+<img src="export/snap2023-09-15-00-10-27.png" width="512" style="border-radius: 50%"><br>
+<img src="export/snap2023-09-15-00-19-22.png" width="512" style="border-radius: 50%"><br>
